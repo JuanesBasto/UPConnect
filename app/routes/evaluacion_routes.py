@@ -24,7 +24,7 @@ def agregar_evaluacion(id):
     cur.execute("SELECT 1 FROM Evaluaciones WHERE ID_profesor = %s AND ID_usuario = %s", (id, user_id))
     if cur.fetchone():
         flash("Ya has evaluado a este profesor", "warning")
-        return redirect(url_for('profesor.profesor_detalle', id=id))
+        return redirect(url_for('profesor.profesor_detalle', slug=id))
 
     cur.execute("""
         INSERT INTO Evaluaciones (ID_profesor, ID_usuario, Estrellas, Comentario, Fecha)

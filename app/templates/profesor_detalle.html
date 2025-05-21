@@ -7,7 +7,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ url_for('profesor.listar_profesores') }}">Consulta Profesores</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('profesor.listar_profesores') }}">Consulta Profesores</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">{{ profesor.nombre_profesor }}</li>
         </ol>
     </nav>
@@ -29,7 +30,12 @@
 
             <h3>Evaluaciones</h3>
             {% if evaluaciones %}
-            <p>Calificación promedio: <strong>{{ promedio | round(2) }}</strong> / 5</p>
+                {% if promedio is not none %}
+                    <p>Calificación promedio: <strong>{{ promedio | round(2) }}</strong> / 5</p>
+                {% else %}
+                    <p>Este profesor aún no tiene evaluaciones.</p>
+                {% endif %}
+
             <ul class="list-group">
                 {% for eval in evaluaciones %}
                 <li class="list-group-item">
